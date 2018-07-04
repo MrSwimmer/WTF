@@ -1,13 +1,10 @@
 package com.mrswimmer.shift.domain.interactor
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
 import com.kelvinapps.rxfirebase.RxFirebaseAuth
-
 
 class FireService {
     private var auth = FirebaseAuth.getInstance()
-    private var storage = FirebaseStorage.getInstance().getReference()
 
     fun signIn(email: String, password: String, callBack: AuthCallBack) {
         RxFirebaseAuth.signInWithEmailAndPassword(auth, email, password)

@@ -4,4 +4,5 @@ import com.arellomobile.mvp.MvpView;
 
 interface SignInFragmentView extends MvpView {
 
+    void showErrorToast(String message);
 }

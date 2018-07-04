@@ -67,7 +67,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
     @Override
     @StateStrategyType(OneExecutionStateStrategy.class)
     public void showToast(String message) {
-        Log.i("code", "toast");
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 

@@ -1,7 +1,7 @@
 package com.mrswimmer.shift.di;
 
-import com.bignerdranch.android.osm.di.module.FireModule;
-import com.bignerdranch.android.osm.di.module.SharedPreferencesModule;
+import com.mrswimmer.shift.di.module.FireModule;
+import com.mrswimmer.shift.di.module.NavigatorModule;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragmentPresenter;
@@ -21,32 +21,32 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {FireModule.class, SharedPreferencesModule.class})
+@Component(modules = {FireModule.class, NavigatorModule.class})
 public interface AppComponent {
-
-    void inject(MainActivityPresenter mainActivityPresenter);
-
-    void inject(ProfileFragment profileFragment);
-
-    void inject(ProfileFragmentPresenter profileFragmentPresenter);
-
-    void inject(SettingsFragment settingsFragment);
-
-    void inject(SettingsFragmentPresenter settingsFragmentPresenter);
-
-    void inject(TasksFragment tasksFragment);
-
-    void inject(TasksFragmentPresenter tasksFragmentPresenter);
 
     void inject(MainActivity mainActivity);
 
     void inject(AuthActivity authActivity);
 
-    void inject(SignInFragment signInFragment);
+    void inject(MainActivityPresenter mainActivityPresenter);
 
     void inject(SignUpFragment signUpFragment);
 
     void inject(SignUpFragmentPresenter signUpFragmentPresenter);
 
     void inject(SignInFragmentPresenter signInFragmentPresenter);
+
+    void inject(SignInFragment signInFragment);
+
+    void inject(ProfileFragmentPresenter profileFragmentPresenter);
+
+    void inject(ProfileFragment profileFragment);
+
+    void inject(SettingsFragmentPresenter settingsFragmentPresenter);
+
+    void inject(SettingsFragment settingsFragment);
+
+    void inject(TasksFragment tasksFragment);
+
+    void inject(TasksFragmentPresenter tasksFragmentPresenter);
 }

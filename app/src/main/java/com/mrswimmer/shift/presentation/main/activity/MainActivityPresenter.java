@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mrswimmer.shift.R;
-import com.mrswimmer.shift.domain.interactor.SettingsService;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.di.qualifier.Global;
@@ -31,9 +30,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     @Inject
     @Global
     Router globalRouter;
-
-    @Inject
-    SettingsService settingsService;
 
     public void setupDrawerContent(NavigationView navigationView) {
         navigationView.setCheckedItem(0);
@@ -59,10 +55,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         getViewState().checkDrawerItem(menuItem);
     }
 
-    public String getEmail() {
-        return settingsService.getEmail();
-    }
-
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
@@ -72,5 +64,9 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     public void share() {
 
+    }
+
+    public int getEmail() {
+        return 0;
     }
 }
