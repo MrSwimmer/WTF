@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -18,6 +19,9 @@ import com.mrswimmer.shift.presentation.base.BaseFragment;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
@@ -29,7 +33,7 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         return new TasksFragmentPresenter();
     }
 
-    @BindView(R.id.tasks_container)
+    @BindView(R.id.tasks_recycler)
     RecyclerView recyclerView;
 
     @Override
@@ -42,18 +46,12 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        presenter.setRecyclerData();
     }
 
     @Override
     protected int getLayoutID() {
         return R.layout.fragment_tasks;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        presenter.setRecyclerData();
     }
 
     @Override

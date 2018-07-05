@@ -1,5 +1,7 @@
 package com.mrswimmer.shift.di;
 
+import android.content.Context;
+
 import com.bignerdranch.android.osm.data.paging.FioPositionalDataSource;
 import com.bignerdranch.android.osm.presentation.notes.recycler.FioPagingAdapter;
 import com.mrswimmer.shift.di.module.FireModule;
@@ -29,6 +31,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {FireModule.class, NavigatorModule.class, SharedPreferencesModule.class})
 public interface AppComponent {
+    Context context();
 
     void inject(MainActivity mainActivity);
 
@@ -58,7 +61,7 @@ public interface AppComponent {
 
     void inject(FioPositionalDataSource fioPositionalDataSource);
 
-    void inject(FireService fireService);
+    void inject(FioPagingAdapter fioPagingAdapter);
 
-    void inject(@NotNull FioPagingAdapter fioPagingAdapter);
+    void inject(FireService fireService);
 }

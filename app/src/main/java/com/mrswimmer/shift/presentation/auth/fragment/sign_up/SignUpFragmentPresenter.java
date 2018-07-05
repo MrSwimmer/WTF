@@ -40,7 +40,7 @@ public class SignUpFragmentPresenter extends MvpPresenter<SignUpFragmentView> {
         fireService.signUp(email, pass, new FireService.AuthCallBack() {
             @Override
             public void onSuccess(boolean success) {
-                Log.i("code", fireService.isSignedIn() + "");
+                fireService.createUser("Russia");
                 globalRouter.navigateTo(Screens.MAIN_ACTIVITY);
             }
 

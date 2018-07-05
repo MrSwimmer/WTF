@@ -52,6 +52,8 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                 localRouter.replaceScreen(Screens.SETTINGS_SCREEN);
                 break;
             default:
+                localRouter.replaceScreen(Screens.TASKS_SCREEN);
+                break;
         }
         menuItem.setChecked(true);
         getViewState().checkDrawerItem(menuItem);

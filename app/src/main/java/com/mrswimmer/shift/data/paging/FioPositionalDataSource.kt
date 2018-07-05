@@ -7,29 +7,9 @@ import com.mrswimmer.shift.data.model.req.Fio
 import com.mrswimmer.shift.domain.interactor.FireService
 import javax.inject.Inject
 
-class FioPositionalDataSource() : PositionalDataSource<Fio>() {
+class FioPositionalDataSource : PositionalDataSource<Fio>() {
     @Inject
-    lateinit var fireService: FireService;
-
-    var type = 0
-    var afterSleep = false
-    var beginPeriod: Long = 0
-
-    constructor(afterSleep: Boolean) : this() {
-        type = 1
-        this.afterSleep = afterSleep
-    }
-
-    constructor(beginPeriod: Long) : this() {
-        type = 2
-        this.beginPeriod = beginPeriod
-    }
-
-    constructor(beginPeriod: Long, afterSleep: Boolean) : this() {
-        type = 3
-        this.afterSleep = afterSleep
-        this.beginPeriod = beginPeriod
-    }
+    lateinit var fireService: FireService
 
     init {
         App.getComponent().inject(this)

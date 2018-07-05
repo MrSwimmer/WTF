@@ -3,18 +3,12 @@ package com.mrswimmer.shift.domain.interactor
 import android.arch.paging.PositionalDataSource
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.events.Subscriber
-import com.kelvinapps.rxfirebase.DataSnapshotMapper
+import com.google.firebase.database.*
 import com.kelvinapps.rxfirebase.RxFirebaseAuth
-import com.kelvinapps.rxfirebase.RxFirebaseDatabase
 import com.mrswimmer.shift.App
+import com.mrswimmer.shift.data.model.firebase.Acc
+import com.mrswimmer.shift.data.model.firebase.Task
 import com.mrswimmer.shift.data.model.req.Fio
-import com.mrswimmer.shift.domain.CallbackFabric
 import javax.inject.Inject
 
 class FireService {
@@ -54,21 +48,21 @@ class FireService {
         return auth.currentUser!!.email!!
     }
 
-    fun getId(): String {
+    private fun getId(): String {
         return settingsService.userId
     }
 
     private val dbUser = db.child("accs").child(getId()).child("id")
 
     fun loadRange(params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Fio>) {
-        dbUser.child("tasks").limitToFirst(params.loadSize).startAt(params.startPosition.toDouble()).addValueEventListener(object : ValueEventListener{
+        db.child("tasks").limitToFirst(params.loadSize).startAt(params.startPosition.toDouble()).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.i("code", "cancel fire")
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("code", "data change fire")
-                var tasks: List<Fio> = listOf()
+                Log.i("code", "data change fire $dataSnapshot")
+                val tasks: List<Fio> = listOf()
                 dataSnapshot.children.forEach {
                     it.getValue(Fio::class.java)
                 }
@@ -79,17 +73,22 @@ class FireService {
     }
 
     fun loadFirstPage(params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Fio>) {
-        dbUser.child("tasks").limitToFirst(params.pageSize).addValueEventListener(object : ValueEventListener {
+        db.child("tasks").limitToFirst(params.pageSize).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.i("code", "cancel fire")
+                Log.i("code", "cancel fire first")
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("code", "data change fire")
-                var tasks: List<Fio> = listOf()
-                dataSnapshot.children.forEach {
-                    it.getValue(Fio::class.java)
+                Log.i("code", "data change fire first ")
+                val tasks: List<Fio> = listOf()
+                dataSnapshot.children.forEach{
+                    Log.i("code", "first ch ${it.child("id")}")
                 }
+                /*val fio = Fio("q", "w", "e", "r", "t", 0)
+                val tasks: List<Fio> = listOf(fio, fio, fio)*/
+                /*dataSnapshot.children.forEach {
+                    it.getValue(Fio::class.java)
+                }*/
                 callback.onResult(tasks, 0)
             }
         })
@@ -101,9 +100,15 @@ class FireService {
         fun onError(e: Throwable)
     }
 
-    interface FiosCallBack {
-        fun onSuccess(fios: List<Fio>)
+    fun createUser(country: String) {
+        val accId = db.child("accs").push()
+        val acc = Acc(getEmail(), country, accId.key)
+        accId.setValue(acc)
+    }
 
-        fun onError(e: Throwable)
+    fun addNotes() {
+        val taskId = db.child("tasks").push()
+        val task = Task(taskId.key, 0)
+        taskId.setValue(task)
     }
 }

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -35,15 +35,18 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    compile 'com.arello-mobile:moxy-android:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    kapt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    compile 'com.arello-mobile:moxy-android:1.5.5'
+    compile 'com.arello-mobile:moxy-app-compat:1.5.5'
+    kapt 'com.arello-mobile:moxy-compiler:1.5.5'
+
     compile 'com.google.dagger:dagger:2.10'
     kapt "com.google.dagger:dagger-compiler:2.10"
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'ru.terrakok.cicerone:cicerone:3.0.0'
-    annotationProcessor 'com.jakewharton:butterknife:8.8.1'
-    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -58,6 +61,5 @@ dependencies {
     compile 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.android.support:design:27.1.1'
     implementation "android.arch.paging:runtime:1.0.1"
-    implementation "android.arch.persistence.room:rxjava2:1.0.0"
 }
 apply plugin: 'com.google.gms.google-services'

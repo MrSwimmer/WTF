@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.mrswimmer.shift.di.AppComponent;
 import com.mrswimmer.shift.di.DaggerAppComponent;
+import com.mrswimmer.shift.di.module.SharedPreferencesModule;
 
 
 public class App extends Application {
@@ -17,6 +18,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         component = DaggerAppComponent.builder()
+                .sharedPreferencesModule(new SharedPreferencesModule(getApplicationContext()))
                 .build();
     }
 }

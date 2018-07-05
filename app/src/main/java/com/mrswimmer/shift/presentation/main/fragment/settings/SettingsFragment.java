@@ -11,6 +11,7 @@ import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.base.BaseFragment;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SettingsFragment extends BaseFragment implements SettingsFragmentView {
     @InjectPresenter
@@ -37,4 +38,8 @@ public class SettingsFragment extends BaseFragment implements SettingsFragmentVi
         return R.layout.fragment_settings;
     }
 
+    @OnClick(R.id.settings_add)
+    void onAddClick() {
+        presenter.addNotes();
+    }
 }
