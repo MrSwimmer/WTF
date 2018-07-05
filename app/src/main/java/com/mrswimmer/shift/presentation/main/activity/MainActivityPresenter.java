@@ -11,6 +11,7 @@ import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.di.qualifier.Global;
 import com.mrswimmer.shift.di.qualifier.Local;
+import com.mrswimmer.shift.domain.interactor.FireService;
 
 import javax.inject.Inject;
 
@@ -25,11 +26,12 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     @Inject
     @Local
-    Router router;
-
+    Router localRouter;
     @Inject
     @Global
     Router globalRouter;
+    @Inject
+    FireService fireService;
 
     public void setupDrawerContent(NavigationView navigationView) {
         navigationView.setCheckedItem(0);
@@ -42,12 +44,12 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     private void selectDrawerItem(MenuItem menuItem) {
         Log.i("code", "select drawer item");
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_tasks:
-                router.replaceScreen(Screens.TASKS_SCREEN);
+                localRouter.replaceScreen(Screens.TASKS_SCREEN);
                 break;
             case R.id.nav_settings:
-                router.replaceScreen(Screens.SETTINGS_SCREEN);
+                localRouter.replaceScreen(Screens.SETTINGS_SCREEN);
                 break;
             default:
         }
@@ -58,15 +60,19 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        Log.i("code", "firstattach");
-        router.newRootScreen(Screens.TASKS_SCREEN);
+        Log.i("code", "first attach");
+        localRouter.newRootScreen(Screens.TASKS_SCREEN);
     }
 
-    public void share() {
-
+    void share() {
+        globalRouter.navigateTo(Screens.SHARE);
     }
 
-    public int getEmail() {
-        return 0;
+    public String getEmail() {
+        return fireService.getEmail();
+    }
+
+    void goToProfile() {
+        localRouter.replaceScreen(Screens.PROFILE_SCREEN);
     }
 }

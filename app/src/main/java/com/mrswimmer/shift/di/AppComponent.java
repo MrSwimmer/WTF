@@ -1,7 +1,11 @@
 package com.mrswimmer.shift.di;
 
+import com.bignerdranch.android.osm.data.paging.FioPositionalDataSource;
+import com.bignerdranch.android.osm.presentation.notes.recycler.FioPagingAdapter;
 import com.mrswimmer.shift.di.module.FireModule;
 import com.mrswimmer.shift.di.module.NavigatorModule;
+import com.mrswimmer.shift.di.module.SharedPreferencesModule;
+import com.mrswimmer.shift.domain.interactor.FireService;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragmentPresenter;
@@ -16,12 +20,14 @@ import com.mrswimmer.shift.presentation.main.fragment.settings.SettingsFragmentP
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragment;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragmentPresenter;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 @Singleton
-@Component(modules = {FireModule.class, NavigatorModule.class})
+@Component(modules = {FireModule.class, NavigatorModule.class, SharedPreferencesModule.class})
 public interface AppComponent {
 
     void inject(MainActivity mainActivity);
@@ -49,4 +55,10 @@ public interface AppComponent {
     void inject(TasksFragment tasksFragment);
 
     void inject(TasksFragmentPresenter tasksFragmentPresenter);
+
+    void inject(FioPositionalDataSource fioPositionalDataSource);
+
+    void inject(FireService fireService);
+
+    void inject(@NotNull FioPagingAdapter fioPagingAdapter);
 }

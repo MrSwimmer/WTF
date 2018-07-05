@@ -32,7 +32,13 @@ public class GlobalNavigator implements Navigator {
                     intent = new Intent(activity, AuthActivity.class);
                     activity.startActivity(intent);
                     activity.finish();
-
+                case Screens.SHARE:
+                    intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Присоединяйтесь к Shift!");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Поделиться");
+                    intent = Intent.createChooser(intent, "С помощью");
+                    activity.startActivity(intent);
             }
         } else if (commands[0] instanceof BackTo) {
             activity.finish();

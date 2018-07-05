@@ -1,22 +1,17 @@
 package com.mrswimmer.shift.presentation.auth.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.di.qualifier.Global;
-import com.mrswimmer.shift.di.qualifier.Local;
 import com.mrswimmer.shift.domain.interactor.FireService;
 import com.mrswimmer.shift.presentation.base.BaseActivity;
-import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 
 import javax.inject.Inject;
 
-import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 
 public class AuthActivity extends BaseActivity {
@@ -31,7 +26,7 @@ public class AuthActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(fireService.isEnter())
+        if(fireService.isSignedIn())
             globalRouter.navigateTo(Screens.MAIN_ACTIVITY);
     }
 

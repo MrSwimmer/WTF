@@ -1,18 +1,26 @@
 package com.mrswimmer.shift.presentation.main.fragment.tasks;
 
+import android.arch.paging.PagedList;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.bignerdranch.android.osm.data.paging.FioDiffUtilCallback;
+import com.bignerdranch.android.osm.presentation.notes.recycler.FioPagingAdapter;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.base.BaseFragment;
 
-import butterknife.ButterKnife;
+import javax.inject.Inject;
+
 
 public class TasksFragment extends BaseFragment implements TasksFragmentView {
+
     @InjectPresenter
     TasksFragmentPresenter presenter;
 
@@ -20,6 +28,9 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
     public TasksFragmentPresenter presenter() {
         return new TasksFragmentPresenter();
     }
+
+    @BindView(R.id.tasks_container)
+    RecyclerView recyclerView;
 
     @Override
     protected void injectDependencies() {
@@ -30,6 +41,8 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
 
     @Override
@@ -37,4 +50,16 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         return R.layout.fragment_tasks;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        presenter.setRecyclerData();
+    }
+
+    @Override
+    public void setAdapter(PagedList pagedList) {
+        FioPagingAdapter pagingAdapter = new FioPagingAdapter(new FioDiffUtilCallback());
+        pagingAdapter.submitList(pagedList);
+        recyclerView.setAdapter(pagingAdapter);
+    }
 }

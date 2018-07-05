@@ -17,6 +17,9 @@ public interface Screens {
     String SETTINGS_SCREEN = "settings screen";
     String PROFILE_SCREEN = "profile screen";
 
+    //action
+    String SHARE = "share";
+
     //Containers
     int CONTAINER_AUTH = R.id.auth_container;
     int CONTAINER_MAIN = R.id.main_container;

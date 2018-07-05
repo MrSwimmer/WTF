@@ -6,16 +6,26 @@ public class Fio {
     String third;
     String emailCo;
     String emailAcc;
+    int result;
 
     public Fio() {
     }
 
-    public Fio(String first, String second, String third, String emailCo, String emailAcc) {
+    public Fio(String first, String second, String third, String emailCo, String emailAcc, int result) {
         this.first = first;
         this.second = second;
         this.third = third;
         this.emailCo = emailCo;
         this.emailAcc = emailAcc;
+        this.result = result;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
     }
 
     public String getFirst() {

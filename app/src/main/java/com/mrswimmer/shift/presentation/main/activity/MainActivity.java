@@ -53,10 +53,11 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         drawerToggle = setupDrawerToggle();
         drawerLayout.addDrawerListener(drawerToggle);
         TextView email = headerLayout.findViewById(R.id.header_email);
-        //email.setText(presenter.getEmail());
+        email.setText(presenter.getEmail());
         ImageView share = headerLayout.findViewById(R.id.header_share);
         share.setOnClickListener(v -> presenter.share());
-
+        ImageView profile = headerLayout.findViewById(R.id.header_profile);
+        profile.setOnClickListener(v -> presenter.goToProfile());
         //first screen
         Menu m = navigationView.getMenu();
         m.getItem(0).setChecked(true);
