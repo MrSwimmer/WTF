@@ -1,7 +1,6 @@
 package com.mrswimmer.shift.presentation.main.fragment.tasks;
 
 import android.arch.paging.PagedList;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,13 +10,11 @@ import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.bignerdranch.android.osm.data.paging.FioDiffUtilCallback;
-import com.bignerdranch.android.osm.presentation.notes.recycler.FioPagingAdapter;
+import com.bignerdranch.android.osm.data.paging.TaskDiffUtilCallback;
+import com.bignerdranch.android.osm.presentation.notes.recycler.TaskPagingAdapter;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.base.BaseFragment;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +44,7 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         presenter.setRecyclerData();
+        Log.i("code", "setdata");
     }
 
     @Override
@@ -56,7 +54,7 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
     @Override
     public void setAdapter(PagedList pagedList) {
-        FioPagingAdapter pagingAdapter = new FioPagingAdapter(new FioDiffUtilCallback());
+        TaskPagingAdapter pagingAdapter = new TaskPagingAdapter(new TaskDiffUtilCallback());
         pagingAdapter.submitList(pagedList);
         recyclerView.setAdapter(pagingAdapter);
     }

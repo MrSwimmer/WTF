@@ -3,6 +3,7 @@ package com.mrswimmer.shift.presentation.auth.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.data.screen.Screens;
@@ -22,7 +23,6 @@ public class AuthActivity extends BaseActivity {
 
     @Inject
     FireService fireService;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

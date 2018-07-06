@@ -63,7 +63,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         Log.i("code", "first attach");
-        localRouter.newRootScreen(Screens.TASKS_SCREEN);
+        //localRouter.navigateTo(Screens.TASKS_SCREEN);
     }
 
     void share() {

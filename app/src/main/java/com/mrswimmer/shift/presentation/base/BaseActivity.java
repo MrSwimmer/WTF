@@ -37,18 +37,22 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
     @Inject
     @Global
     Router globalRouter;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
+        super.onCreate(this.savedInstanceState);
         Log.i("code", "create");
         injectDependencies();
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-        if (savedInstanceState == null) {
-            Log.i("code", "save null");
-            localRouter.newRootScreen(Screens.SIGN_IN_SCREEN);
-        }
+        //!!!do not fucking touch this!!!
+        getWindow().getDecorView().post(() ->
+        {
+            if (savedInstanceState == null)
+                localRouter.newRootScreen(Screens.TASKS_SCREEN);
+        });
     }
 
     protected abstract int getContainerId();
@@ -58,6 +62,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
         super.onResume();
         localNavigatorHolder.setNavigator(new LocalNavigator(getSupportFragmentManager(), getContainerId()));
         globalNavigatorHolder.setNavigator(new GlobalNavigator(this));
+
     }
 
     protected abstract void injectDependencies();

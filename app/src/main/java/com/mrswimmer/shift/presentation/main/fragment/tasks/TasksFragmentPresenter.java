@@ -7,13 +7,11 @@ import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.bignerdranch.android.osm.data.paging.FioPositionalDataSource;
+import com.bignerdranch.android.osm.data.paging.TaskPositionalDataSource;
 import com.mrswimmer.shift.App;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import javax.inject.Inject;
 
 @InjectViewState
 public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
@@ -23,7 +21,7 @@ public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
     }
 
     void setRecyclerData() {
-        FioPositionalDataSource positionalDataSource = new FioPositionalDataSource();
+        TaskPositionalDataSource positionalDataSource = new TaskPositionalDataSource();
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(8)

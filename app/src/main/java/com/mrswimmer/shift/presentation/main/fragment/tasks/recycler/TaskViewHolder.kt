@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.mrswimmer.shift.R
 
-class FioViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+class TaskViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     var fio: TextView = v.findViewById(R.id.item_fio_fio)
     var yes: ImageView = v.findViewById(R.id.item_fio_yes)
     var no: ImageView = v.findViewById(R.id.item_fio_no)

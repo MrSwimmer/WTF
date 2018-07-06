@@ -16,13 +16,20 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
+import com.mrswimmer.shift.data.screen.Screens;
+import com.mrswimmer.shift.di.qualifier.Local;
 import com.mrswimmer.shift.presentation.base.BaseActivity;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import ru.terrakok.cicerone.Router;
 
 public class MainActivity extends BaseActivity implements MainActivityView {
+    private final String TOPIC = "JavaSampleApproach";
 
     ActionBarDrawerToggle drawerToggle;
 
@@ -48,6 +55,7 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
         setSupportActionBar(toolbar);
         presenter.setupDrawerContent(navigationView);
         headerLayout = navigationView.getHeaderView(0);
