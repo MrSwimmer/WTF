@@ -7,37 +7,41 @@ import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.bignerdranch.android.osm.data.paging.TaskPositionalDataSource;
+import com.google.firebase.database.DatabaseError;
 import com.mrswimmer.shift.App;
+import com.mrswimmer.shift.data.model.firebase.Task;
+import com.mrswimmer.shift.domain.interactor.FireService;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+
 @InjectViewState
 public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
+
+    @Inject
+    public FireService fireService;
 
     TasksFragmentPresenter() {
         App.getComponent().inject(this);
     }
 
-    void setRecyclerData() {
-        TaskPositionalDataSource positionalDataSource = new TaskPositionalDataSource();
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(8)
-                .build();
-        PagedList pagedList = new PagedList.Builder(positionalDataSource, config)
-                .setNotifyExecutor(new MainThreadExecutor())
-                .setFetchExecutor(Executors.newSingleThreadExecutor())
-                .build();
-        getViewState().setAdapter(pagedList);
-    }
+    public void setRecyclerData() {
+        fireService.getTasks(new FireService.TasksCallBack() {
+            @Override
+            public void onSuccess(@NotNull List<Task> tasks) {
+                getViewState().setAdapter(tasks);
+            }
 
-    class MainThreadExecutor implements Executor {
-        @Override
-        public void execute(@NonNull Runnable command) {
-            new Handler(Looper.getMainLooper()).post(command);
-        }
+            @Override
+            public void onError(@NotNull DatabaseError e) {
+                getViewState().showErrorToast(e);
+            }
+        });
     }
 
 }

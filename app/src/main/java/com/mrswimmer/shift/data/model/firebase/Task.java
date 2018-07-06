@@ -1,5 +1,8 @@
 package com.mrswimmer.shift.data.model.firebase;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+
 public class Task {
     String id;
     int count;

@@ -42,6 +42,8 @@ public class LocalNavigator extends SupportFragmentNavigator {
                 return new TasksFragment();
             case Screens.SETTINGS_SCREEN:
                 return new SettingsFragment();
+            case Screens.ADD_SCREEN:
+                return new AddFragment();
             default:
                 return new TasksFragment();
         }

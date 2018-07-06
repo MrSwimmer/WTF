@@ -10,11 +10,14 @@ import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.bignerdranch.android.osm.data.paging.TaskDiffUtilCallback;
-import com.bignerdranch.android.osm.presentation.notes.recycler.TaskPagingAdapter;
+import com.google.firebase.database.DatabaseError;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
+import com.mrswimmer.shift.data.model.firebase.Task;
 import com.mrswimmer.shift.presentation.base.BaseFragment;
+import com.mrswimmer.shift.presentation.main.fragment.tasks.recycler.TaskAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,10 +55,14 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         return R.layout.fragment_tasks;
     }
 
+
     @Override
-    public void setAdapter(PagedList pagedList) {
-        TaskPagingAdapter pagingAdapter = new TaskPagingAdapter(new TaskDiffUtilCallback());
-        pagingAdapter.submitList(pagedList);
-        recyclerView.setAdapter(pagingAdapter);
+    public void setAdapter(List<Task> tasks) {
+        recyclerView.setAdapter(new TaskAdapter(tasks));
+    }
+
+    @Override
+    public void showErrorToast(DatabaseError e) {
+        showToast(e.getMessage());
     }
 }

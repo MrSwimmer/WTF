@@ -23,4 +23,5 @@ public interface Screens {
     //Containers
     int CONTAINER_AUTH = R.id.auth_container;
     int CONTAINER_MAIN = R.id.main_container;
+    String ADD_SCREEN = "add screen";
 }

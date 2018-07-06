@@ -11,7 +11,6 @@ import com.mrswimmer.shift.data.model.firebase.Task
 import javax.inject.Inject
 import com.kelvinapps.rxfirebase.DataSnapshotMapper
 import com.kelvinapps.rxfirebase.RxFirebaseDatabase
-import com.mrswimmer.shift.data.model.req.TaskResult
 
 
 class FireService {
@@ -57,44 +56,15 @@ class FireService {
         return settingsService.userId
     }
 
-    private val dbUser = db.child("accs").child(getId()).child("id")
-
-    fun loadRange(params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Task>) {
-        Log.i("code", "lastid $lastId")
-        /*db.child("tasks").limitToFirst(params.loadSize).orderByKey().startAt(lastId + 1).addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                Log.i("code", "cancel fire")
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("code", "data change fire ${dataSnapshot.children}")
-                val tasks: MutableList<Task> = mutableListOf()
-                dataSnapshot.children.forEach {
-                    val task = it.getValue(Task::class.java)
-                    tasks.add(task!!)
-                    Log.i("code", "${task.id}")
-                    lastId = task!!.id
-                }
-                callback.onResult(tasks)
-            }
-        })*/
-        RxFirebaseDatabase.observeSingleValueEvent(db.child("tasks").limitToFirst(params.loadSize).orderByKey().startAt(lastId + 1), DataSnapshotMapper.listOf(Task::class.java))
-                .subscribe({ tasks ->
-                    Log.i("code", "${tasks.size}")
-                    if (tasks.size > 0)
-                        lastId = tasks[tasks.size - 1].id
-                    callback.onResult(tasks)
-                })
-    }
-
-    fun loadFirstPage(params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Task>) {
-        /*db.child("tasks").limitToFirst(params.pageSize).addValueEventListener(object : ValueEventListener {
+    fun getTasks(callback: TasksCallBack) {
+        db.child("tasks").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.i("code", "cancel fire first")
+                Log.i("code", "cancel fire")
+                callback.onError(databaseError)
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("code", "data change fire first ")
+                Log.i("code", "data change fir")
                 var tasks: MutableList<Task> = mutableListOf()
                 dataSnapshot.children.forEach {
                     val task = it.getValue(Task::class.java)
@@ -102,21 +72,22 @@ class FireService {
                     Log.i("code", "first ${task.id}")
                     lastId = task.id
                 }
-                callback.onResult(tasks, 0)
+                Log.i("code", "${tasks.size}")
+                callback.onSuccess(tasks)
             }
-        })*/
-        RxFirebaseDatabase.observeSingleValueEvent(db.child("tasks").limitToFirst(params.pageSize), DataSnapshotMapper.listOf(Task::class.java))
-                .subscribe({ tasks ->
-                    if (tasks.size > 0)
-                        lastId = tasks[tasks.size - 1].id
-                    callback.onResult(tasks, 0)
-                })
+        })
     }
 
     interface AuthCallBack {
         fun onSuccess(success: Boolean)
 
         fun onError(e: Throwable)
+    }
+
+    interface TasksCallBack {
+        fun onSuccess(tasks: MutableList<Task>)
+
+        fun onError(e: DatabaseError)
     }
 
     fun createUser(country: String) {
