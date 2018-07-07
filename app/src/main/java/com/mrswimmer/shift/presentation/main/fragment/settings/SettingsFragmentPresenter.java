@@ -10,14 +10,8 @@ import javax.inject.Inject;
 @InjectViewState
 public class SettingsFragmentPresenter extends MvpPresenter<SettingsFragmentView> {
 
-    @Inject
-    FireService fireService;
-
-    public SettingsFragmentPresenter() {
+    SettingsFragmentPresenter() {
         App.getComponent().inject(this);
     }
 
-    public void addNotes() {
-        fireService.addNotes();
-    }
 }

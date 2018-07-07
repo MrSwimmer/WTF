@@ -28,12 +28,6 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentView
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-    }
-
-    @Override
     protected int getLayoutID() {
         return R.layout.fragment_profile;
     }

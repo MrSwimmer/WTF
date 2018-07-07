@@ -2,8 +2,6 @@ package com.mrswimmer.shift.di;
 
 import android.content.Context;
 
-import com.bignerdranch.android.osm.data.paging.TaskPositionalDataSource;
-import com.bignerdranch.android.osm.presentation.notes.recycler.TaskPagingAdapter;
 import com.mrswimmer.shift.di.module.FireModule;
 import com.mrswimmer.shift.di.module.NavigatorModule;
 import com.mrswimmer.shift.di.module.SharedPreferencesModule;
@@ -15,12 +13,16 @@ import com.mrswimmer.shift.presentation.auth.fragment.sign_up.SignUpFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_up.SignUpFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 import com.mrswimmer.shift.presentation.main.activity.MainActivityPresenter;
+import com.mrswimmer.shift.presentation.main.fragment.add.AddFragment;
 import com.mrswimmer.shift.presentation.main.fragment.profile.ProfileFragment;
 import com.mrswimmer.shift.presentation.main.fragment.profile.ProfileFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.fragment.settings.SettingsFragment;
 import com.mrswimmer.shift.presentation.main.fragment.settings.SettingsFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragment;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragmentPresenter;
+import com.mrswimmer.shift.presentation.main.fragment.tasks.recycler.TaskAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -57,9 +59,9 @@ public interface AppComponent {
 
     void inject(TasksFragmentPresenter tasksFragmentPresenter);
 
-    void inject(TaskPositionalDataSource taskPositionalDataSource);
-
-    void inject(TaskPagingAdapter taskPagingAdapter);
-
     void inject(FireService fireService);
+
+    void inject(AddFragment addFragment);
+
+    void inject(TaskAdapter taskAdapter);
 }

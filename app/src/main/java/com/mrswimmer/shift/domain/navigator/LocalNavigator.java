@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_up.SignUpFragment;
+import com.mrswimmer.shift.presentation.main.fragment.add.AddFragment;
 import com.mrswimmer.shift.presentation.main.fragment.profile.ProfileFragment;
 import com.mrswimmer.shift.presentation.main.fragment.settings.SettingsFragment;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragment;

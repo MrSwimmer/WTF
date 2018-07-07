@@ -52,7 +52,9 @@
             android:id="@+id/sign_in_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Пароль" />
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:text="qwerty" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -68,7 +70,9 @@
             android:id="@+id/sign_in_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:text="mrswimmerlab@gmail.com" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView

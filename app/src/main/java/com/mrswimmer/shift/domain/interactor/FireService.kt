@@ -5,12 +5,12 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.kelvinapps.rxfirebase.RxFirebaseAuth
+import com.kelvinapps.rxfirebase.RxFirebaseDatabase
 import com.mrswimmer.shift.App
 import com.mrswimmer.shift.data.model.firebase.Acc
 import com.mrswimmer.shift.data.model.firebase.Task
+import java.util.HashMap
 import javax.inject.Inject
-import com.kelvinapps.rxfirebase.DataSnapshotMapper
-import com.kelvinapps.rxfirebase.RxFirebaseDatabase
 
 
 class FireService {
@@ -30,14 +30,20 @@ class FireService {
         RxFirebaseAuth.signInWithEmailAndPassword(auth, email, password)
                 .map({ authResult -> authResult.user != null })
                 .take(1)
-                .subscribe({ callBack.onSuccess(it) }, { callBack.onError(it) })
+                .subscribe({
+                    getUserId()
+                    callBack.onSuccess(it)
+                }, { callBack.onError(it) })
     }
 
     fun signUp(email: String, password: String, callBack: AuthCallBack) {
         RxFirebaseAuth.createUserWithEmailAndPassword(auth, email, password)
                 .map({ authResult -> authResult.user != null })
                 .take(1)
-                .subscribe({ callBack.onSuccess(it) }, { callBack.onError(it) })
+                .subscribe({
+                    createUser("Russia")
+                    callBack.onSuccess(it)
+                }, { callBack.onError(it) })
     }
 
     fun isSignedIn(): Boolean {
@@ -50,10 +56,6 @@ class FireService {
 
     fun getEmail(): String {
         return auth.currentUser!!.email!!
-    }
-
-    private fun getId(): String {
-        return settingsService.userId
     }
 
     fun getTasks(callback: TasksCallBack) {
@@ -69,10 +71,8 @@ class FireService {
                 dataSnapshot.children.forEach {
                     val task = it.getValue(Task::class.java)
                     tasks.add(task!!)
-                    Log.i("code", "first ${task.id}")
                     lastId = task.id
                 }
-                Log.i("code", "${tasks.size}")
                 callback.onSuccess(tasks)
             }
         })
@@ -92,18 +92,37 @@ class FireService {
 
     fun createUser(country: String) {
         val accId = db.child("accs").push()
+        settingsService.userId = accId.push().key
         val acc = Acc(getEmail(), country, accId.key)
         accId.setValue(acc)
     }
 
+
     fun addNotes() {
         val taskId = db.child("tasks").push()
-        val task = Task(taskId.key, 0, "first", "second", "third", "Russia")
+        val task = Task(taskId.key, 0, "first", "second", "third", "Russia", HashMap<String, Int>())
         taskId.setValue(task)
     }
 
     fun sendResult(id: String, result: Int) {
-        val taskId = db.child("tasks").child(id).child("accs").push()
+        val taskId = db.child("tasks").child(id).child("accs").child(settingsService.userId)
         taskId.setValue(result)
+    }
+
+    private fun getUserId() {
+        Log.i("code", "email ${auth.currentUser!!.email}")
+        db.child("accs").orderByChild("email").equalTo(auth.currentUser!!.email).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach{
+                    val id = it.getValue(Acc::class.java)
+                    Log.i("code", "userid ${id!!.id}")
+                    settingsService.userId = id.id
+                }
+            }
+
+        })
     }
 }

@@ -3,6 +3,9 @@ package com.mrswimmer.shift.data.model.firebase;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Task {
     String id;
     int count;
@@ -10,14 +13,24 @@ public class Task {
     String second;
     String third;
     String country;
+    HashMap<String, Integer> accs;
 
-    public Task(String id, int count, String first, String second, String third, String country) {
+    public Task(String id, int count, String first, String second, String third, String country, HashMap<String, Integer> accs) {
         this.id = id;
         this.count = count;
         this.first = first;
         this.second = second;
         this.third = third;
         this.country = country;
+        this.accs = accs;
+    }
+
+    public HashMap<String, Integer> getAccs() {
+        return accs;
+    }
+
+    public void setAccs(HashMap<String, Integer> accs) {
+        this.accs = accs;
     }
 
     public String getFirst() {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.bignerdranch.android.osm.presentation.notes.recycler.TaskViewHolder
+import com.mrswimmer.shift.App
 import com.mrswimmer.shift.R
 import com.mrswimmer.shift.data.model.firebase.Task
 import com.mrswimmer.shift.domain.interactor.FireService
@@ -15,8 +16,11 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 class TaskAdapter(tasks: MutableList<Task>) : RecyclerView.Adapter<TaskViewHolder>() {
-    private val tasks = tasks
+    private var tasks = tasks
 
+    init {
+        App.getComponent().inject(this)
+    }
     @Inject
     lateinit var fireService: FireService
 
@@ -35,5 +39,13 @@ class TaskAdapter(tasks: MutableList<Task>) : RecyclerView.Adapter<TaskViewHolde
 
     override fun getItemCount(): Int {
         return tasks.size
+    }
+
+    fun getData(): MutableList<Task> {
+        return tasks
+    }
+
+    fun setData(tasks: MutableList<Task>) {
+        this.tasks = tasks
     }
 }
