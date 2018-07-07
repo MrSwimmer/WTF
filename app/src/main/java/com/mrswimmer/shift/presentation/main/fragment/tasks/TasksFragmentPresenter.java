@@ -35,6 +35,10 @@ public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
             @Override
             public void onSuccess(@NotNull List<Task> tasks) {
                 getViewState().setAdapter(tasks);
+                if(tasks.size()==0)
+                    getViewState().setEmptyText(true);
+                else
+                    getViewState().setEmptyText(false);
             }
 
             @Override

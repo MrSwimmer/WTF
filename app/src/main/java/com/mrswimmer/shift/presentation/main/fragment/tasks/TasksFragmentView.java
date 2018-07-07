@@ -11,4 +11,7 @@ interface TasksFragmentView extends MvpView {
     void setAdapter(List<Task> pagedList);
 
     void showErrorToast(DatabaseError e);
+
+    void setEmptyText(boolean empty);
+
 }

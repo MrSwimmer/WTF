@@ -1,6 +1,5 @@
 package com.mrswimmer.shift.presentation.main.fragment.tasks;
 
-import android.arch.paging.PagedList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
@@ -8,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -39,6 +40,10 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
     @BindView(R.id.tasks_recycler)
     RecyclerView recyclerView;
+    @BindView(R.id.tasks_empty)
+    TextView emptyText;
+    @BindView(R.id.tasks_progress)
+    ProgressBar progressBar;
 
     @Override
     protected void injectDependencies() {
@@ -51,6 +56,7 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         presenter.setRecyclerData();
+        progressBar.setVisibility(View.VISIBLE);
         Log.i("code", "setdata");
     }
 
@@ -62,13 +68,12 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
     @Override
     public void setAdapter(List<Task> tasks) {
-
-        if (taskAdapter == null){
+        progressBar.setVisibility(View.INVISIBLE);
+        if (taskAdapter == null) {
             Log.i("code", "first adapter");
             taskAdapter = new TaskAdapter(tasks);
             recyclerView.setAdapter(taskAdapter);
-        }
-        else {
+        } else {
             Log.i("code", "update adapter");
             TaskDiffUtilCallback diffUtilCallback = new TaskDiffUtilCallback(taskAdapter.getData(), tasks);
             DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
@@ -81,5 +86,13 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
     @Override
     public void showErrorToast(DatabaseError e) {
         showToast(e.getMessage());
+    }
+
+    @Override
+    public void setEmptyText(boolean empty) {
+        if (empty)
+            emptyText.setVisibility(View.VISIBLE);
+        else
+            emptyText.setVisibility(View.INVISIBLE);
     }
 }
