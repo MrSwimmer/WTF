@@ -16,12 +16,14 @@ public interface Screens {
     String TASKS_SCREEN = "tasks screen";
     String SETTINGS_SCREEN = "settings screen";
     String PROFILE_SCREEN = "profile screen";
+    String ADD_SCREEN = "add screen";
 
     //action
     String SHARE = "share";
+    String SET_MARK = "set mark";
 
     //Containers
     int CONTAINER_AUTH = R.id.auth_container;
     int CONTAINER_MAIN = R.id.main_container;
-    String ADD_SCREEN = "add screen";
+
 }

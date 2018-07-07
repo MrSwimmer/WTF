@@ -1,12 +1,10 @@
 package com.mrswimmer.shift.presentation.base;
 
-import android.graphics.Typeface;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,6 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.mrswimmer.shift.R;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -48,7 +44,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
 
     @Override
     public void showDialog(String title, String message) {
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "main.ttf");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setMessage(message)
@@ -60,9 +55,26 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     }
 
     @Override
+    public void showChoiceDialog(String title, String message, DialogActionCallback callback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Да", (dialog, id) -> callback.positiveAction(dialog))
+        .setNegativeButton("Нет", (dialog, which) -> callback.negativeAction(dialog));
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    @Override
     public void showToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     protected abstract int getLayoutID();
+
+    public interface DialogActionCallback {
+        void positiveAction(DialogInterface dialog);
+        void negativeAction(DialogInterface dialog);
+    }
 }

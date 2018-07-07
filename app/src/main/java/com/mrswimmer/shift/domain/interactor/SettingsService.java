@@ -1,12 +1,6 @@
 package com.mrswimmer.shift.domain.interactor;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-
-import com.google.firebase.database.DatabaseReference;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SettingsService {
     SharedPreferences sharedPreferences;

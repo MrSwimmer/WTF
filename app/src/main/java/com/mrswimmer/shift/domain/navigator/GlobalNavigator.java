@@ -2,6 +2,7 @@ package com.mrswimmer.shift.domain.navigator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
@@ -35,10 +36,16 @@ public class GlobalNavigator implements Navigator {
                 case Screens.SHARE:
                     intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Присоединяйтесь к Shift!");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Присоединяйтесь к Name Checker! https://play.google.com/store/apps/details?id=com.mrswimmer.shift");
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Поделиться");
                     intent = Intent.createChooser(intent, "С помощью");
                     activity.startActivity(intent);
+                    break;
+                case Screens.SET_MARK:
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=com.mrswimmer.shift"));
+                    activity.startActivity(intent);
+                    break;
             }
         } else if (commands[0] instanceof BackTo) {
             activity.finish();

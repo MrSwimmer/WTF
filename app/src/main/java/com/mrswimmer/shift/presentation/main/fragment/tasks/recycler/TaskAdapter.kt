@@ -2,7 +2,6 @@ package com.mrswimmer.shift.presentation.main.fragment.tasks.recycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 
 import com.bignerdranch.android.osm.presentation.notes.recycler.TaskViewHolder
@@ -10,8 +9,6 @@ import com.mrswimmer.shift.App
 import com.mrswimmer.shift.R
 import com.mrswimmer.shift.data.model.firebase.Task
 import com.mrswimmer.shift.domain.interactor.FireService
-
-import java.util.ArrayList
 
 import javax.inject.Inject
 

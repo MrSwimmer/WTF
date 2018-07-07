@@ -45,6 +45,9 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     private void selectDrawerItem(MenuItem menuItem) {
         Log.i("code", "select drawer item");
         switch (menuItem.getItemId()) {
+            case R.id.nav_profile:
+                localRouter.replaceScreen(Screens.PROFILE_SCREEN);
+                break;
             case R.id.nav_tasks:
                 localRouter.replaceScreen(Screens.TASKS_SCREEN);
                 break;
@@ -62,22 +65,11 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         getViewState().checkDrawerItem(menuItem);
     }
 
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        Log.i("code", "first attach");
-        //localRouter.navigateTo(Screens.TASKS_SCREEN);
-    }
-
     void share() {
         globalRouter.navigateTo(Screens.SHARE);
     }
 
     public String getEmail() {
         return fireService.getEmail();
-    }
-
-    void goToProfile() {
-        localRouter.replaceScreen(Screens.PROFILE_SCREEN);
     }
 }

@@ -91,4 +91,16 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
     public void showSnack(String message, View.OnClickListener snackOnClickListener) {
         Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
     }
+
+    @Override
+    public void showChoiceDialog(String title, String message, BaseFragment.DialogActionCallback callback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Да", (dialog, id) -> callback.positiveAction(dialog))
+                .setNegativeButton("Нет", (dialog, which) -> callback.negativeAction(dialog));
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }

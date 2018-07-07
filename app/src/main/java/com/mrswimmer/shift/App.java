@@ -6,7 +6,6 @@ import com.mrswimmer.shift.di.AppComponent;
 import com.mrswimmer.shift.di.DaggerAppComponent;
 import com.mrswimmer.shift.di.module.SharedPreferencesModule;
 
-
 public class App extends Application {
     private static AppComponent component;
 

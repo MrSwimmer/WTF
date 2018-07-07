@@ -1,9 +1,6 @@
 package com.mrswimmer.shift.presentation.auth.fragment.sign_in;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -32,11 +29,6 @@ public class SignInFragment extends BaseFragment implements SignInFragmentView {
     @Override
     protected void injectDependencies() {
         App.getComponent().inject(this);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.mrswimmer.shift.presentation.auth.fragment.sign_up;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mrswimmer.shift.App;
