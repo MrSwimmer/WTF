@@ -70,7 +70,11 @@ class FireService {
                 var tasks: MutableList<Task> = mutableListOf()
                 dataSnapshot.children.forEach {
                     val task = it.getValue(Task::class.java)
-                    tasks.add(task!!)
+                    if (task!!.accs != null){
+                        if (!task.accs.containsKey(settingsService.userId))
+                            tasks.add(task)
+                    } else
+                        tasks.add(task)
                     lastId = task.id
                 }
                 callback.onSuccess(tasks)
@@ -111,12 +115,12 @@ class FireService {
 
     private fun getUserId() {
         Log.i("code", "email ${auth.currentUser!!.email}")
-        db.child("accs").orderByChild("email").equalTo(auth.currentUser!!.email).addListenerForSingleValueEvent(object : ValueEventListener{
+        db.child("accs").orderByChild("email").equalTo(auth.currentUser!!.email).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                p0.children.forEach{
+                p0.children.forEach {
                     val id = it.getValue(Acc::class.java)
                     Log.i("code", "userid ${id!!.id}")
                     settingsService.userId = id.id
