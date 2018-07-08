@@ -15,4 +15,10 @@
         <item name="colorAccent">@color/accent</item>
         <!--<item name="android:windowBackground">@drawable/shift_back_load</item>-->
     </style>
+
+    <style name="ShiftDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
 </resources>

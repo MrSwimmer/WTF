@@ -67,8 +67,8 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         share.setOnClickListener(v -> presenter.share());
         //first screen
         Menu m = navigationView.getMenu();
-        m.getItem(0).setChecked(true);
-        setTitle(m.getItem(0).getTitle());
+        m.getItem(1).setChecked(true);
+        setTitle(m.getItem(1).getTitle());
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {

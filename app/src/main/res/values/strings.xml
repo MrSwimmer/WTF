@@ -20,5 +20,17 @@
     <string name="sign_up_hint_pass">Пароль</string>
     <string name="sign_up_hint_repeat">Повторите пароль</string>
     <string name="sign_up_title">Регистрация</string>
+
     <string name="tasks_empty">Для вас пока нет задач</string>
+
+    <string name="support_title">Опишите проблему, с которой вы столкнулись в приложении и мы обязательно постараемся ее решить</string>
+    <string name="support_button_send">Отправить</string>
+    <string name="support_hint_subject">Тема</string>
+    <string name="support_hint_text">Сообщение</string>
+
+    <string name="nav_item_profile">Профиль</string>
+    <string name="nav_item_tasks">Задачи</string>
+    <string name="nav_item_settings">Настройки</string>
+    <string name="nav_item_caravan">Караваны</string>
+
 </resources>

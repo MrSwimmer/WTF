@@ -32,4 +32,8 @@ public class SettingsFragmentPresenter extends MvpPresenter<SettingsFragmentView
     public void setMark() {
         globalRouter.navigateTo(Screens.SET_MARK);
     }
+
+    public void goToSupport() {
+        globalRouter.navigateTo(Screens.SUPPORT_SCREEN);
+    }
 }

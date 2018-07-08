@@ -60,6 +60,6 @@ public class SettingsFragment extends BaseFragment implements SettingsFragmentVi
 
     @OnClick(R.id.settings_support)
     void onSupportClick() {
-        showDialog("Хех, не работает", "Чуть позже допилим");
+        presenter.goToSupport();
     }
 }

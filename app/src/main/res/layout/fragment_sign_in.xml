@@ -53,8 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sign_in_hint_pass"
-            android:inputType="textPassword"
-            android:text="qwerty" />
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -71,8 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sign_in_hint_email"
-            android:inputType="textEmailAddress"
-            android:text="mrswimmerlab@gmail.com" />
+            android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView

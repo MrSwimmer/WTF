@@ -3,10 +3,13 @@ package com.mrswimmer.shift.domain.navigator;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.SupportActivity;
 
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
+import com.mrswimmer.shift.presentation.main.fragment.settings.report.ReportActivity;
+
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.commands.BackTo;
 import ru.terrakok.cicerone.commands.Command;
@@ -44,6 +47,10 @@ public class GlobalNavigator implements Navigator {
                 case Screens.SET_MARK:
                     intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("market://details?id=com.mrswimmer.shift"));
+                    activity.startActivity(intent);
+                    break;
+                case Screens.SUPPORT_SCREEN:
+                    intent = new Intent(activity, ReportActivity.class);
                     activity.startActivity(intent);
                     break;
             }

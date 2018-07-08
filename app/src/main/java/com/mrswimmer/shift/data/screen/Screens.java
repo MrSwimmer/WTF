@@ -2,6 +2,8 @@ package com.mrswimmer.shift.data.screen;
 
 import com.mrswimmer.shift.R;
 
+import org.jetbrains.annotations.Nullable;
+
 public interface Screens {
     //activity
     String MAIN_ACTIVITY = "main activity";
@@ -21,9 +23,9 @@ public interface Screens {
     //action
     String SHARE = "share";
     String SET_MARK = "set mark";
+    String SUPPORT_SCREEN = "support screen";
 
     //Containers
     int CONTAINER_AUTH = R.id.auth_container;
     int CONTAINER_MAIN = R.id.main_container;
-
 }
