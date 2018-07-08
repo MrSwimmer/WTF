@@ -2,4 +2,23 @@
     <string name="app_name">WTF?</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="settings_button_sign_out">Выйти из аккаунта</string>
+    <string name="settings_button_set_mark">Оценить в Google Play</string>
+    <string name="settings_button_version">О версии</string>
+    <string name="settings_button_app">О приложении</string>
+    <string name="settings_button_support">Служба поддержки</string>
+
+    <string name="sign_in_button_enter">Вход</string>
+    <string name="sign_in_button_reg">Регистрация</string>
+    <string name="sign_in_hint_pass">Пароль</string>
+    <string name="sign_in_hint_email">Email</string>
+    <string name="sign_in_title">Вход</string>
+    <string name="sign_up_button_reg">Регистрация</string>
+    <string name="sign_up_button_back">назад</string>
+    <string name="sign_up_hint_email">Email</string>
+    <string name="sign_up_hint_pass">Пароль</string>
+    <string name="sign_up_hint_repeat">Повторите пароль</string>
+    <string name="sign_up_title">Регистрация</string>
+    <string name="tasks_empty">Для вас пока нет задач</string>
 </resources>

@@ -24,7 +24,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Вход"
+            android:text="@string/sign_in_button_enter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_enter" />
@@ -33,7 +33,7 @@
             android:id="@+id/sign_in_reg"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Регистрация"
+            android:text="@string/sign_in_button_reg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="327dp" />
@@ -52,7 +52,7 @@
             android:id="@+id/sign_in_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Пароль"
+            android:hint="@string/sign_in_hint_pass"
             android:inputType="textPassword"
             android:text="qwerty" />
     </android.support.design.widget.TextInputLayout>
@@ -70,7 +70,7 @@
             android:id="@+id/sign_in_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/sign_in_hint_email"
             android:inputType="textEmailAddress"
             android:text="mrswimmerlab@gmail.com" />
     </android.support.design.widget.TextInputLayout>
@@ -81,8 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Вход"
-        android:textColor="@color/colorAccent"
+        android:text="@string/sign_in_title"
+        android:textColor="@color/accent"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
         app:layout_constraintEnd_toEndOf="parent"

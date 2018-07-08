@@ -24,7 +24,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Регистрация"
+            android:text="@string/sign_up_button_reg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="385dp" />
@@ -33,7 +33,7 @@
             android:id="@+id/sign_up_back"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="назад"
+            android:text="@string/sign_up_button_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_reg" />
@@ -53,7 +53,7 @@
             android:id="@+id/sign_up_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/sign_up_hint_email"
             android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
@@ -72,7 +72,7 @@
             android:id="@+id/sign_up_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Пароль"
+            android:hint="@string/sign_up_hint_pass"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
@@ -89,7 +89,7 @@
             android:id="@+id/sign_up_repeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Повторите пароль"
+            android:hint="@string/sign_up_hint_repeat"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
@@ -97,8 +97,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
-        android:textColor="@color/colorAccent"
+        android:text="@string/sign_up_title"
+        android:textColor="@color/accent"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"

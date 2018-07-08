@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="Выйти из аккаунта"
+            android:text="@string/settings_button_sign_out"
             android:textSize="18sp" />
 
         <View
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="Оценить в Google Play"
+            android:text="@string/settings_button_set_mark"
             android:textSize="18sp" />
 
         <View
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="О версии"
+            android:text="@string/settings_button_version"
             android:textSize="18sp" />
 
         <View
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="О приложении"
+            android:text="@string/settings_button_app"
             android:textSize="18sp" />
 
         <View
@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="Служба поддержки"
+            android:text="@string/settings_button_support"
             android:textSize="18sp" />
 
         <View
