@@ -1,4 +1,4 @@
-package com.mrswimmer.shift.di.utils
+package com.mrswimmer.shift.domain.utils
 
 import android.support.v7.util.DiffUtil
 import com.mrswimmer.shift.data.model.firebase.Task
