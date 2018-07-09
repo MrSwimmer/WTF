@@ -69,5 +69,5 @@ public interface AppComponent {
 
     void inject(ReportActivity reportActivity);
 
-    void inject(@NotNull SendResultService sendResultService);
+    void inject(SendResultService sendResultService);
 }

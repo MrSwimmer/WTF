@@ -17,6 +17,7 @@ import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 
 import java.util.Map;
+import java.util.Random;
 
 
 public class FCMService extends FirebaseMessagingService {
@@ -37,30 +38,33 @@ public class FCMService extends FirebaseMessagingService {
 
     private void sendNotification(String id, String fio) {
 
-        Intent intentYes = new Intent(this, SendResultService.class);;
+        Intent intentYes = new Intent(this, SendResultService.class);
         intentYes.putExtra("result", 1);
         intentYes.putExtra("id", id);
 
-        Intent intentNo = new Intent(this, SendResultService.class);;
+        Log.i("code", "getex " + intentYes.getStringExtra("id"));
+
+        Intent intentNo = new Intent(this, SendResultService.class);
         intentNo.putExtra("result", 0);
         intentNo.putExtra("id", id);
 
-        PendingIntent pendingIntentYes = PendingIntent.getService(this, 0, intentYes, 0);
-        PendingIntent pendingIntentNo = PendingIntent.getService(this, 0, intentNo, 0);
+        PendingIntent pendingIntentYes = PendingIntent.getService(this, 0, intentYes, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntentNo = PendingIntent.getService(this, 0, intentNo, PendingIntent.FLAG_UPDATE_CURRENT);
+        /*Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);*/
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.icon))
                 .setContentTitle(this.getString(R.string.app_name))
                 .setContentText(fio)
+                .setAutoCancel(true)
                 .addAction(R.drawable.ic_yes, "Верно", pendingIntentYes)
-                .addAction(R.drawable.ic_no, "Неверно", pendingIntentNo)
-                .setAutoCancel(true);
+                .addAction(R.drawable.ic_no, "Неверно", pendingIntentNo);
 
         notificationBuilder.build().flags |= Notification.FLAG_AUTO_CANCEL;
 
-
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(count, notificationBuilder.build());
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }

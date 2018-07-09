@@ -7,6 +7,11 @@ import android.util.Log
 import com.mrswimmer.shift.App
 import com.mrswimmer.shift.domain.interactor.FireService
 import javax.inject.Inject
+import android.content.Intent.getIntent
+import android.R.string.cancel
+import android.app.NotificationManager
+import android.content.Context
+
 
 class SendResultService : Service() {
     @Inject
@@ -26,11 +31,13 @@ class SendResultService : Service() {
         super.onDestroy()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        var id = intent!!.extras.getString("id", "error")
-        var result = intent.extras.getInt("result", 10)
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        var id = intent.getStringExtra("id")
+        var result = intent.getIntExtra("result", 10)
         Log.i("code", "service start $id $result")
         fireService.sendResult(id, result)
+        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.cancel(0)
         return super.onStartCommand(intent, flags, startId)
     }
 }
