@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.SupportActivity;
 
+import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
@@ -36,6 +37,7 @@ public class GlobalNavigator implements Navigator {
                     intent = new Intent(activity, AuthActivity.class);
                     activity.startActivity(intent);
                     activity.finish();
+                    break;
                 case Screens.SHARE:
                     intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
