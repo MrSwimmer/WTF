@@ -27,6 +27,8 @@
 
         <activity android:name="com.mrswimmer.shift.presentation.main.fragment.settings.report.ReportActivity"
             android:theme="@style/ShiftDialog"/>
+
+        <service android:name=".domain.service.SendResultService"/>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import com.mrswimmer.shift.di.module.FireModule;
 import com.mrswimmer.shift.di.module.NavigatorModule;
 import com.mrswimmer.shift.di.module.SharedPreferencesModule;
 import com.mrswimmer.shift.domain.interactor.FireService;
+import com.mrswimmer.shift.domain.service.SendResultService;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragmentPresenter;
@@ -22,6 +23,8 @@ import com.mrswimmer.shift.presentation.main.fragment.settings.SettingsFragmentP
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragment;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.TasksFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.recycler.TaskAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -65,4 +68,6 @@ public interface AppComponent {
     void inject(TaskAdapter taskAdapter);
 
     void inject(ReportActivity reportActivity);
+
+    void inject(@NotNull SendResultService sendResultService);
 }

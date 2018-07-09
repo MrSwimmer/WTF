@@ -1,5 +1,6 @@
 package com.mrswimmer.shift.domain.service;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,6 +16,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 
+import java.util.Map;
+
 
 public class FCMService extends FirebaseMessagingService {
 
@@ -24,28 +27,40 @@ public class FCMService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.i("code", "data " + remoteMessage.getData().toString());
-        sendNotification(remoteMessage.getData().get("first"));
+        Map<String, String> data = remoteMessage.getData();
+        String fio = data.get("first") + " " + data.get("second") + " " + data.get("third");
+        String id = data.get("id");
+        Log.i("code", "data id " + id);
+        sendNotification(id, fio);
         count++;
     }
 
-    private void sendNotification(String body) {
+    private void sendNotification(String id, String fio) {
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intentYes = new Intent(this, SendResultService.class);;
+        intentYes.putExtra("result", 1);
+        intentYes.putExtra("id", id);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        Intent intentNo = new Intent(this, SendResultService.class);;
+        intentNo.putExtra("result", 0);
+        intentNo.putExtra("id", id);
+
+        PendingIntent pendingIntentYes = PendingIntent.getService(this, 0, intentYes, 0);
+        PendingIntent pendingIntentNo = PendingIntent.getService(this, 0, intentNo, 0);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.icon))
                 .setContentTitle(this.getString(R.string.app_name))
-                .setContentText(body + count)
-                .addAction(R.drawable.ic_yes, "Верно", pendingIntent)
-                .addAction(R.drawable.ic_no, "Неверно", pendingIntent)
+                .setContentText(fio)
+                .addAction(R.drawable.ic_yes, "Верно", pendingIntentYes)
+                .addAction(R.drawable.ic_no, "Неверно", pendingIntentNo)
                 .setAutoCancel(true);
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder.build().flags |= Notification.FLAG_AUTO_CANCEL;
 
-        notificationManager.notify(0, notificationBuilder.build());
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(count, notificationBuilder.build());
     }
 }

@@ -109,6 +109,7 @@ class FireService {
     }
 
     fun sendResult(id: String, result: Int) {
+        Log.i("code", "send res $id $result ${settingsService.userId}")
         val taskId = db.child("tasks").child(id).child("accs").child(settingsService.userId)
         taskId.setValue(result)
     }
