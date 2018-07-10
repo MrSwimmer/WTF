@@ -14,7 +14,6 @@ import com.mrswimmer.shift.presentation.auth.fragment.sign_up.SignUpFragment;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_up.SignUpFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 import com.mrswimmer.shift.presentation.main.activity.MainActivityPresenter;
-import com.mrswimmer.shift.presentation.main.fragment.add.AddFragment;
 import com.mrswimmer.shift.presentation.main.fragment.profile.ProfileFragment;
 import com.mrswimmer.shift.presentation.main.fragment.profile.ProfileFragmentPresenter;
 import com.mrswimmer.shift.presentation.main.fragment.settings.report.ReportActivity;
@@ -62,8 +61,6 @@ public interface AppComponent {
     void inject(TasksFragmentPresenter tasksFragmentPresenter);
 
     void inject(FireService fireService);
-
-    void inject(AddFragment addFragment);
 
     void inject(TaskAdapter taskAdapter);
 

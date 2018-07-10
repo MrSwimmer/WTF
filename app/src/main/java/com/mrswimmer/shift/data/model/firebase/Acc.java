@@ -4,11 +4,37 @@ public class Acc {
     String email;
     String country;
     String id;
+    int amountOfTasks;
+    int wins;
 
     public Acc(String email, String country, String id) {
         this.email = email;
         this.country = country;
         this.id = id;
+    }
+
+    public Acc(String email, String country, String id, int amountOfTasks, int wins) {
+        this.email = email;
+        this.country = country;
+        this.id = id;
+        this.amountOfTasks = amountOfTasks;
+        this.wins = wins;
+    }
+
+    public int getAmountOfTasks() {
+        return amountOfTasks;
+    }
+
+    public void setAmountOfTasks(int amountOfTasks) {
+        this.amountOfTasks = amountOfTasks;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
     }
 
     public Acc() {

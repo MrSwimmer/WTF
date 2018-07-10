@@ -54,9 +54,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
             case R.id.nav_settings:
                 localRouter.replaceScreen(Screens.SETTINGS_SCREEN);
                 break;
-            case R.id.nav_add:
-                localRouter.replaceScreen(Screens.ADD_SCREEN);
-                break;
             default:
                 localRouter.replaceScreen(Screens.TASKS_SCREEN);
                 break;

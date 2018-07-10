@@ -18,7 +18,6 @@ public interface Screens {
     String TASKS_SCREEN = "tasks screen";
     String SETTINGS_SCREEN = "settings screen";
     String PROFILE_SCREEN = "profile screen";
-    String ADD_SCREEN = "add screen";
 
     //action
     String SHARE = "share";

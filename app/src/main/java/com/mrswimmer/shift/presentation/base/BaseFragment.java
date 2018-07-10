@@ -77,4 +77,22 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
         void positiveAction(DialogInterface dialog);
         void negativeAction(DialogInterface dialog);
     }
+
+    @Override
+    public void showProgress() {
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+        baseActivity.showProgress();
+    }
+
+    @Override
+    public void hideProgress() {
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+        baseActivity.hideProgress();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgress();
+    }
 }

@@ -32,5 +32,7 @@
     <string name="nav_item_tasks">Задачи</string>
     <string name="nav_item_settings">Настройки</string>
     <string name="nav_item_caravan">Караваны</string>
+    <string name="profile_wins">Правильные ответы:</string>
+    <string name="profile_count">Выполненные задачи:</string>
 
 </resources>

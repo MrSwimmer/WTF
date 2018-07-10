@@ -42,8 +42,8 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
     RecyclerView recyclerView;
     @BindView(R.id.tasks_empty)
     TextView emptyText;
-    @BindView(R.id.tasks_progress)
-    ProgressBar progressBar;
+    /*@BindView(R.id.tasks_progress)
+    ProgressBar progressBar;*/
 
     @Override
     protected void injectDependencies() {
@@ -56,7 +56,8 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         presenter.setRecyclerData();
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
+        showProgress();
         Log.i("code", "setdata");
     }
 
@@ -68,7 +69,8 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
     @Override
     public void setAdapter(List<Task> tasks) {
-        progressBar.setVisibility(View.INVISIBLE);
+        hideProgress();
+        //progressBar.setVisibility(View.INVISIBLE);
         if (taskAdapter == null) {
             Log.i("code", "first adapter");
             taskAdapter = new TaskAdapter(tasks);

@@ -47,4 +47,9 @@ public class SignInFragmentPresenter extends MvpPresenter<SignInFragmentView> {
     void goToRegistration() {
         localRouter.navigateTo(Screens.SIGN_UP_SCREEN);
     }
+
+    public void initUserAfterGoogleSignIn() {
+        fireService.getUserId();
+        globalRouter.navigateTo(Screens.MAIN_ACTIVITY);
+    }
 }

@@ -9,4 +9,6 @@ public interface BaseView extends MvpView {
     void showDialog(String title, String message);
     void showChoiceDialog(String title, String message, BaseFragment.DialogActionCallback callback);
     void showSnack(String message, View.OnClickListener snackOnClickListener);
+    void showProgress();
+    void hideProgress();
 }

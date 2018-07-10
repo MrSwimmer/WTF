@@ -1,11 +1,9 @@
 package com.mrswimmer.shift.domain.interactor
 
-import android.arch.paging.PositionalDataSource
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.kelvinapps.rxfirebase.RxFirebaseAuth
-import com.kelvinapps.rxfirebase.RxFirebaseDatabase
 import com.mrswimmer.shift.App
 import com.mrswimmer.shift.data.model.firebase.Acc
 import com.mrswimmer.shift.data.model.firebase.Task
@@ -70,7 +68,7 @@ class FireService {
                 var tasks: MutableList<Task> = mutableListOf()
                 dataSnapshot.children.forEach {
                     val task = it.getValue(Task::class.java)
-                    if (task!!.accs != null){
+                    if (task!!.accs != null) {
                         if (!task.accs.containsKey(settingsService.userId))
                             tasks.add(task)
                     } else
@@ -114,20 +112,44 @@ class FireService {
         taskId.setValue(result)
     }
 
-    private fun getUserId() {
+    fun getUserId() {
         Log.i("code", "email ${auth.currentUser!!.email}")
         db.child("accs").orderByChild("email").equalTo(auth.currentUser!!.email).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
+            override fun onCancelled(databaseError: DatabaseError) {
             }
 
-            override fun onDataChange(p0: DataSnapshot) {
-                p0.children.forEach {
-                    val id = it.getValue(Acc::class.java)
-                    Log.i("code", "userid ${id!!.id}")
-                    settingsService.userId = id.id
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (!dataSnapshot.hasChildren()) {
+                    Log.i("code", "has note id")
+                    createUser("Russia")
+                } else {
+                    dataSnapshot.children.forEach {
+                        val id = it.getValue(Acc::class.java)
+                        Log.i("code", "userid ${id!!.id}")
+                        settingsService.userId = id.id
+                    }
                 }
             }
 
         })
+    }
+
+    fun getUser(callback: UserCallback) {
+        db.child("accs").child(settingsService.userId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                callback.onError(databaseError)
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val acc = dataSnapshot.getValue(Acc::class.java)
+                callback.onSuccess(acc!!)
+            }
+
+        })
+    }
+
+    interface UserCallback {
+        fun onSuccess(acc: Acc)
+        fun onError(databaseError: DatabaseError)
     }
 }

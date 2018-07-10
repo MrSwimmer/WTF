@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
 public class SignInFragment extends BaseFragment implements SignInFragmentView {
 
     private static final String TAG = "code";
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     private static final int RC_SIGN_IN = 9001;
 
     @BindView(R.id.sign_in_email)
@@ -87,28 +88,22 @@ public class SignInFragment extends BaseFragment implements SignInFragmentView {
 
     @OnClick(R.id.sign_in_button_google)
     void onGoogleClick() {
-        Log.i(TAG, "on google click");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i(TAG, "on activity result");
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            Log.i(TAG, "if rc equals");
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.i(TAG, "try task1");
                 firebaseAuthWithGoogle(account);
-                Log.i(TAG, "try task2");
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.i(TAG, "Google sign in failed", e);
-                // ...
+                Toast.makeText(getActivity(), "Ощибка авторизации", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -116,18 +111,14 @@ public class SignInFragment extends BaseFragment implements SignInFragmentView {
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.i(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.i(TAG, "signInWithCredential:success");
-
-                        //updateUI(user);
+                        presenter.initUserAfterGoogleSignIn();
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.i(TAG, "signInWithCredential:failure" + task.getException());
-                        //Snackbar.make(getView().findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                        //updateUI(null);
+                        Toast.makeText(getActivity(), "Ощибка авторизации", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

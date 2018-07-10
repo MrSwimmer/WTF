@@ -24,6 +24,7 @@ public class FCMService extends FirebaseMessagingService {
 
     private final String TAG = "code";
     int count = 0;
+    int curtasks = 0;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -34,6 +35,7 @@ public class FCMService extends FirebaseMessagingService {
         Log.i("code", "data id " + id);
         sendNotification(id, fio);
         count++;
+        curtasks++;
     }
 
     private void sendNotification(String id, String fio) {
@@ -65,6 +67,6 @@ public class FCMService extends FirebaseMessagingService {
         notificationBuilder.build().flags |= Notification.FLAG_AUTO_CANCEL;
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
+        notificationManager.notify(count, notificationBuilder.build());
     }
 }

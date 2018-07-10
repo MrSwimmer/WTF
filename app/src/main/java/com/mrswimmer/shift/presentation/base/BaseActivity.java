@@ -6,11 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.data.screen.Screens;
 import com.mrswimmer.shift.di.qualifier.Global;
 import com.mrswimmer.shift.di.qualifier.Local;
@@ -19,6 +21,7 @@ import com.mrswimmer.shift.domain.navigator.LocalNavigator;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
@@ -38,6 +41,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
     @Global
     Router globalRouter;
     private Bundle savedInstanceState;
+
+    @Nullable
+    @BindView(R.id.main_progress)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,5 +109,15 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseV
                 .setNegativeButton("Нет", (dialog, which) -> callback.negativeAction(dialog));
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }
