@@ -6,6 +6,7 @@ import com.mrswimmer.shift.di.module.FireModule;
 import com.mrswimmer.shift.di.module.NavigatorModule;
 import com.mrswimmer.shift.di.module.SharedPreferencesModule;
 import com.mrswimmer.shift.domain.interactor.FireService;
+import com.mrswimmer.shift.domain.service.FCMService;
 import com.mrswimmer.shift.domain.service.SendResultService;
 import com.mrswimmer.shift.presentation.auth.activity.AuthActivity;
 import com.mrswimmer.shift.presentation.auth.fragment.sign_in.SignInFragment;
@@ -67,4 +68,6 @@ public interface AppComponent {
     void inject(ReportActivity reportActivity);
 
     void inject(SendResultService sendResultService);
+
+    void inject(FCMService fcmService);
 }

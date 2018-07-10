@@ -89,10 +89,4 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
         BaseActivity baseActivity = (BaseActivity) getActivity();
         baseActivity.hideProgress();
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        hideProgress();
-    }
 }

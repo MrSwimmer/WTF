@@ -142,6 +142,7 @@ class FireService {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val acc = dataSnapshot.getValue(Acc::class.java)
+                Log.i("code", "error snap $dataSnapshot")
                 callback.onSuccess(acc!!)
             }
 
