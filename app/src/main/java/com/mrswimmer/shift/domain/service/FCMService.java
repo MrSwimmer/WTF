@@ -14,6 +14,8 @@ import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Map;
 
 
@@ -39,7 +41,7 @@ public class FCMService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String id, String fio) {
-
+        EventBus.getDefault().post("get");
         Intent intentYes = new Intent(this, SendResultService.class);
         intentYes.putExtra("result", 1);
         intentYes.putExtra("id", id);
@@ -71,6 +73,5 @@ public class FCMService extends FirebaseMessagingService {
         Log.i("code", "num " + num);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(num, notificationBuilder.build());
-
     }
 }

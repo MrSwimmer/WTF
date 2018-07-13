@@ -4,8 +4,10 @@ import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.data.api.WtfApi;
 import com.mrswimmer.shift.data.api.req.Result;
 import com.mrswimmer.shift.data.api.req.TasksRequest;
+import com.mrswimmer.shift.data.api.res.AccResult;
 import com.mrswimmer.shift.data.api.res.ResultStatus;
 import com.mrswimmer.shift.data.api.res.TasksResult;
+import com.mrswimmer.shift.data.model.firebase.Acc;
 
 import javax.inject.Inject;
 
@@ -42,5 +44,18 @@ public class ApiService {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onSuccess, callback::onError);
+    }
+
+    public void getProfile(TasksRequest request, ProfileCallback callback) {
+        request.setAccId(settingsService.getUserId());
+        api.getProfile(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onSuccess, callback::onError);
+    }
+
+    public interface ProfileCallback {
+        void onSuccess(AccResult acc);
+        void onError(Throwable e);
     }
 }

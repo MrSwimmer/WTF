@@ -13,10 +13,15 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
+import com.mrswimmer.shift.data.api.res.TasksResult;
 import com.mrswimmer.shift.data.model.firebase.Task;
 import com.mrswimmer.shift.domain.utils.TaskDiffUtilCallback;
 import com.mrswimmer.shift.presentation.base.BaseFragment;
 import com.mrswimmer.shift.presentation.main.fragment.tasks.recycler.TaskAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -94,5 +99,22 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
             emptyText.setVisibility(View.VISIBLE);
         else
             emptyText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String action) {
+        presenter.setRecyclerData();
     }
 }

@@ -49,7 +49,6 @@ public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
             }
         });
 
-        
         /*fireService.getTasks(new FireService.TasksCallBack() {
             @Override
             public void onSuccess(@NotNull List<Task> tasks) {
@@ -65,7 +64,5 @@ public class TasksFragmentPresenter extends MvpPresenter<TasksFragmentView> {
                 getViewState().showErrorToast(e);
             }
         });*/
-
     }
-
 }

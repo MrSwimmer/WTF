@@ -5,5 +5,5 @@ import com.mrswimmer.shift.data.model.firebase.Acc;
 
 interface ProfileFragmentView extends MvpView {
     void setUserData(Acc acc);
-    void showErrorMessage();
+    void showErrorMessage(String message);
 }

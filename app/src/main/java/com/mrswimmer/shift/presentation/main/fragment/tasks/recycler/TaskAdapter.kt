@@ -41,28 +41,44 @@ class TaskAdapter(tasks: MutableList<Task>) : RecyclerView.Adapter<TaskViewHolde
         Log.i("code", "task $task}")
         holder.fio.text = "${task!!.first} ${task!!.second} ${task!!.third}"
         holder.yes.setOnClickListener({
-            //fireService!!.sendResult(task.id, 1)
-            Log.i("code", " null id ${task.id == null}")
             val result = Result(task.id, 1)
             apiService.sendResult(result, object : ApiService.ResultCallback {
                 override fun onSuccess(tasksResult: TasksResult) {
-                    Log.i("code", "result ${tasksResult.status}")
-                    Log.i("code", "result ${tasksResult.data.size}")
-                    //tasks.remove(task)
-                    val diffUtilCallback = TaskDiffUtilCallback(getData(), tasksResult.data)
+                    /*val diffUtilCallback = TaskDiffUtilCallback(getData(), tasksResult.data)
                     val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                     setData(tasksResult.data as MutableList<Task>)
-                    diffResult.dispatchUpdatesTo(this@TaskAdapter)
-                    //setData(tasksResult.tasksResult as MutableList<Task>)
+                    diffResult.dispatchUpdatesTo(this@TaskAdapter)*/
+                    updateList(tasksResult)
                 }
 
                 override fun onError(e: Throwable) {
                     Log.i("code", "result error ${e.message}")
                 }
-
             })
         })
-        holder.no.setOnClickListener({ fireService!!.sendResult(task.id, 0) })
+        holder.no.setOnClickListener({
+            val result = Result(task.id, 0)
+            apiService.sendResult(result, object : ApiService.ResultCallback {
+                override fun onSuccess(tasksResult: TasksResult) {
+                    /*val diffUtilCallback = TaskDiffUtilCallback(getData(), tasksResult.data)
+                    val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+                    setData(tasksResult.data as MutableList<Task>)
+                    diffResult.dispatchUpdatesTo(this@TaskAdapter)*/
+                    updateList(tasksResult)
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.i("code", "result error ${e.message}")
+                }
+            })
+        })
+    }
+
+    fun updateList(tasksResult: TasksResult) {
+        val diffUtilCallback = TaskDiffUtilCallback(getData(), tasksResult.data)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+        setData(tasksResult.data as MutableList<Task>)
+        diffResult.dispatchUpdatesTo(this@TaskAdapter)
     }
 
     override fun getItemCount(): Int {

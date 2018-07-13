@@ -1,10 +1,7 @@
 package com.mrswimmer.shift.presentation.main.fragment.profile;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -63,7 +60,7 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentView
     }
 
     @Override
-    public void showErrorMessage() {
+    public void showErrorMessage(String message) {
         //progressBar.setVisibility(View.INVISIBLE);
         hideProgress();
         showToast("Ошибка загрузки данных");
