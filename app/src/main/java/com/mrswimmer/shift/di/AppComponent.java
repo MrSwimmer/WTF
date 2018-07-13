@@ -1,10 +1,10 @@
 package com.mrswimmer.shift.di;
 
-import android.content.Context;
-
+import com.mrswimmer.shift.di.module.APIModule;
 import com.mrswimmer.shift.di.module.FireModule;
 import com.mrswimmer.shift.di.module.NavigatorModule;
 import com.mrswimmer.shift.di.module.SharedPreferencesModule;
+import com.mrswimmer.shift.domain.interactor.ApiService;
 import com.mrswimmer.shift.domain.interactor.FireService;
 import com.mrswimmer.shift.domain.service.FCMService;
 import com.mrswimmer.shift.domain.service.SendResultService;
@@ -31,9 +31,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {FireModule.class, NavigatorModule.class, SharedPreferencesModule.class})
+@Component(modules = {FireModule.class, NavigatorModule.class, SharedPreferencesModule.class, APIModule.class})
 public interface AppComponent {
-    Context context();
 
     void inject(MainActivity mainActivity);
 
@@ -70,4 +69,6 @@ public interface AppComponent {
     void inject(SendResultService sendResultService);
 
     void inject(FCMService fcmService);
+
+    void inject(ApiService apiService);
 }

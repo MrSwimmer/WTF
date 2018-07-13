@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.presentation.main.activity.MainActivity;
 
@@ -70,5 +71,6 @@ public class FCMService extends FirebaseMessagingService {
         Log.i("code", "num " + num);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(num, notificationBuilder.build());
+
     }
 }

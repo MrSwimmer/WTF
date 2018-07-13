@@ -27,10 +27,6 @@ class SendResultService : Service() {
         super.onCreate()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val id = intent.getStringExtra("id")
         val result = intent.getIntExtra("result", 10)
@@ -38,8 +34,7 @@ class SendResultService : Service() {
                 Log.i("code", "service start $id $result")
         fireService.sendResult(id, result)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (FCMService.count == 0)
-            manager.cancel(count)
+        manager.cancel(count)
         return super.onStartCommand(intent, flags, startId)
     }
 }

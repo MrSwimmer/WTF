@@ -7,12 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.google.firebase.database.DatabaseError;
 import com.mrswimmer.shift.App;
 import com.mrswimmer.shift.R;
 import com.mrswimmer.shift.data.model.firebase.Task;
@@ -86,7 +84,7 @@ public class TasksFragment extends BaseFragment implements TasksFragmentView {
 
 
     @Override
-    public void showErrorToast(DatabaseError e) {
+    public void showErrorToast(Throwable e) {
         showToast(e.getMessage());
     }
 

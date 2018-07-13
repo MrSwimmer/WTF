@@ -34,5 +34,6 @@
     <string name="nav_item_caravan">Караваны</string>
     <string name="profile_wins">Правильные ответы:</string>
     <string name="profile_count">Выполненные задачи:</string>
+    <string name="url_server">http://172.16.21.151:8090/api/</string>
 
 </resources>
